@@ -1,0 +1,39 @@
+---
+title: "Tuscan Cities"
+author: "Fabio Salvadori"
+date: "5/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Aim of this study
+
+The major tuscan cities are here presented and analysed
+
+### Starting data
+
+These are the starting data on which this study is based
+```{r starting}
+fd<-read.csv('Toscana.csv',sep='\t')
+library(knitr)
+kable(fd,'pipe')
+```
+
+## Analysis
+
+The city with the smallest territory is:
+```{r smallest_terr, echo=FALSE}
+  v<-which(fd==min(fd[4]),arr.ind=T)
+  n<-v[1,1]
+  sprintf("%s    %f %s",fd[n,1],fd[n,3],fd[n,5])
+```
+
+The city with the biggest territory is:
+```{r biggest_terr, echo=FALSE}
+  v<-which(fd==max(fd[4]),arr.ind=T)
+  n<-v[1,1]
+  sprintf("%s    %f %s",fd[n,1],fd[n,3],fd[n,5])
+```
