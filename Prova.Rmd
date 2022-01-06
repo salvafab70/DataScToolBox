@@ -26,14 +26,37 @@ kable(fd,'pipe')
 
 The city with the smallest territory is:
 ```{r smallest_terr, echo=FALSE}
-  v<-which(fd==min(fd[4]),arr.ind=T)
+  v<-which(fd==min(fd['Superficie']),arr.ind=T)
   n<-v[1,1]
-  sprintf("%s    %f %s",fd[n,1],fd[n,3],fd[n,5])
+  sprintf("%s    %f %s",fd[n,'Provincia'],fd[n,'Superficie'],fd[n,'Um'])
 ```
 
 The city with the biggest territory is:
 ```{r biggest_terr, echo=FALSE}
-  v<-which(fd==max(fd[4]),arr.ind=T)
+  v<-which(fd==max(fd['Superficie']),arr.ind=T)
   n<-v[1,1]
-  sprintf("%s    %f %s",fd[n,1],fd[n,3],fd[n,5])
+  sprintf("%s    %f %s",fd[n,'Provincia'],fd[n,'Superficie'],fd[n,'Um'])
+```
+
+The most populated city is:
+```{r most_pop, echo=FALSE}
+  v<-which(fd==max(fd['Popolazione']),arr.ind=T)
+  n<-v[1,1]
+  sprintf("%s    %1.0f inhabitants",fd[n,'Provincia'],fd[n,'Popolazione'])
+```
+
+The less populated city is:
+```{r less_pop, echo=FALSE}
+  v<-which(fd==min(fd['Popolazione']),arr.ind=T)
+  n<-v[1,1]
+  sprintf("%s    %1.0f inabitants",fd[n,'Provincia'],fd[n,'Popolazione'])
+```
+
+\newpage
+This graph compares population vs city extention
+
+```{r graph, echo=FALSE}
+  plot(fd[,4],fd[,3],main='',xlab='',ylab='',xlim=c(0,max(fd['Superficie'])*1.1),ylim=c(0,max(fd['Popolazione'])*1.1))
+  text(fd[,4],fd[,3],labels=fd[,2],pos=4)
+  title(ylab='Population',xlab='Surface')
 ```
